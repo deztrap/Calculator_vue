@@ -78,8 +78,11 @@ export default {
       }
       if (element === "=") {
         this.CalculatorResult = eval(
-          this.previousValue + this.operator + this.CalculatorResult
+          parseInt(this.previousValue) +
+            this.operator +
+            parseInt(this.CalculatorResult)
         );
+
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
         }
