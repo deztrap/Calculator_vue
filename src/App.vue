@@ -16,19 +16,12 @@ export default {
 </script>
 
 <style>
-html,
-body {
-  background-color: #a0d7ff;
+html {
   align-content: center;
-  background-image: url("./assets/fram.png");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background: #26272b;
 }
-main {
-  background-color: #a0d7ff;
-}
+
 #app {
-  background-color: #a0d7ff;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
