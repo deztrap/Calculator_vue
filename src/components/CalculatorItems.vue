@@ -9,9 +9,7 @@
         border-radius: 40px;
       "
     >
-      <div
-        class="w-full m-1 p-3 text-right neoresult font-weight-bold text-white"
-      >
+      <div class="w-full m-1 p-3 text-right neoresult">
         {{ CalculatorResult || 0 }}
       </div>
       <div class="row no-gutters" style="padding-top: 100px">
@@ -69,15 +67,22 @@ export default {
       if (element === "C") {
         this.CalculatorResult = "";
       }
+      if (element === "%") {
+        this.CalculatorResult = this.CalculatorResult / 100;
+      }
       if (["/", "x", "*", "-"].includes(element)) {
         this.operator = element;
         this.previousValue = this.CalculatorResult;
+
         this.CalculatorResult = "";
       }
       if (element === "=") {
         this.CalculatorResult = eval(
           this.previousValue + this.operator + this.CalculatorResult
         );
+        if (this.CalculatorResult === Infinity) {
+          this.CalculatorResult = "Really? dbz";
+        }
         this.previousValue = "";
         this.operator = null;
       }
@@ -86,17 +91,18 @@ export default {
 };
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
 .neomorph {
-  background: linear-gradient(180deg, #464545 0%, #2b2a2a 100%);
+  background: linear-gradient(180deg, #2b2c30 0%, #26272b 100%);
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25), 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .neobtn {
-  background: linear-gradient(142deg, #555454 16.39%, #323131 80.68%);
+  background: linear-gradient(142deg, #34363a 16.39%, #26272b 80.68%);
   box-shadow: 6px 6px 4px rgba(0, 0, 0, 0.57),
-    -6px -6px 13px rgba(255, 255, 255, 0.15);
+    -6px -6px 13px rgba(255, 255, 255, 0.04);
   border-radius: 100px;
   box-sizing: border-box;
-  border: 2px solid rgba(58, 57, 57, 1);
+  border: 2px solid rgba(38, 39, 43, 1);
 }
 .neospecial {
   background: linear-gradient(134.21deg, #c63608 16.53%, #e75729 84.36%);
@@ -105,14 +111,16 @@ export default {
   border: 2px solid rgba(226, 82, 36, 1);
 }
 .neoresult {
-  box-shadow: 4px 4px 4px #3c3b3b, -4px -4px 13px rgba(255, 255, 255, 0.06);
-  height: 250px;
+  background: #1f2023;
+  box-shadow: 2px 2px 4px rgba(255, 255, 255, 0.11),
+    -2px -2px 4px rgba(0, 0, 0, 0.49);
+  height: 300px;
   padding-bottom: 200px;
   border-radius: 20px;
   font-size: 50px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif Impact,
-    Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-weight: 500;
+  font-family: "Orbitron", sans-serif;
+  font-weight: 400;
+  color: #e75729;
 }
 .text-right {
   text-align: right;
