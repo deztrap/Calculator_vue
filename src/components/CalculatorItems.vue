@@ -1,6 +1,16 @@
 <template>
-  <div class="container">
-    <div class="p-3" style="max-width: 400px; margin: 50px; background: #234">
+  <div class="mains">
+    <div
+      class="p-3 rounded foggy"
+      style="
+        max-width: 400px;
+        margin: 100px;
+        background: linear-gradient(191.34deg, #17181a -4.95%, #17181a 103.74%);
+        box-shadow: 32px 12px 80px rgba(0, 93, 178, 0.8);
+
+        backdrop-filter: blur(51px);
+      "
+    >
       <div
         class="
           w-full
@@ -30,7 +40,7 @@
               hover-class
             "
             :class="{
-              highlight_bg: ['C', '+', '-', '/', 'x', '%', '='].includes(
+              highlight_bg: ['C', '+', '-', '/', '*', '%', '='].includes(
                 element
               ),
             }"
@@ -41,8 +51,6 @@
         </div>
       </div>
     </div>
-    <p>{{ operators }}</p>
-    <input placeholder="enter number" />
   </div>
 </template>
 <script>
@@ -59,7 +67,7 @@ export default {
         7,
         8,
         9,
-        "x",
+        "*",
         4,
         5,
         6,
@@ -72,11 +80,30 @@ export default {
         ".",
       ],
       operators: ["+", "-", "*", "/", "="],
+      operator: undefined,
+      previousValue: "",
     };
   },
   methods: {
     calculate(element) {
-      this.CalculatorResult += element;
+      if (!isNaN(element) || element === ".") {
+        this.CalculatorResult += element + "";
+      }
+      if (element === "C") {
+        this.CalculatorResult = "";
+      }
+      if (["/", "x", "*", "-"].includes(element)) {
+        this.operator = element;
+        this.previousValue = this.CalculatorResult;
+        this.CalculatorResult = "";
+      }
+      if (element === "=") {
+        this.CalculatorResult = eval(
+          this.previousValue + this.operator + this.CalculatorResult
+        );
+        this.previousValue = "";
+        this.operator = null;
+      }
     },
   },
 };
