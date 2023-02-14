@@ -72,7 +72,7 @@ export default {
       if (element === "%") {
         this.CalculatorResult = this.CalculatorResult / 100;
       }
-      if (["/", "x", "*", "-"].includes(element)) {
+      if (["/", "x", "*", "-", "+"].includes(element)) {
         this.operator = element;
         this.previousValue = this.CalculatorResult;
 
