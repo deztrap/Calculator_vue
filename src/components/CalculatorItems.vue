@@ -9,13 +9,15 @@
         border-radius: 40px;
       "
     >
+      <div class="calcname">NEOMORPH CALCULATOR</div>
       <div class="w-full m-1 p-3 text-right neoresult">
         {{ CalculatorResult || 0 }}
       </div>
-      <div class="row no-gutters" style="padding-top: 100px">
+
+      <div class="row no-gutters" style="padding-top: 40px">
         <div class="col-3" v-for="element in CalculatorItems" :key="element">
           <div
-            class="lead text-center m-1 py-3 text-white hover-class neobtn"
+            class="lead text-center m-1 py-3 hover-class neobtn"
             :class="{
               neospecial: ['C', '+', '-', '/', '*', '%', '='].includes(element),
             }"
@@ -106,12 +108,15 @@ export default {
   border-radius: 100px;
   box-sizing: border-box;
   border: 2px solid rgba(38, 39, 43, 1);
+  color: #7f8286;
 }
 .neospecial {
-  background: linear-gradient(134.21deg, #c63608 16.53%, #e75729 84.36%);
+  background: linear-gradient(134.21deg, #a21d14 16.53%, #e75729 84.36%);
   box-shadow: 6px 6px 4px rgba(5, 5, 5, 0.57),
     -6px -6px 13px rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(226, 82, 36, 1);
+  color: #fff;
+  font-weight: 200;
 }
 .neoresult {
   background: #1f2023;
@@ -137,5 +142,10 @@ export default {
 }
 .highlight_bg {
   background: rgb(140, 8, 235);
+}
+.calcname {
+  color: #535659;
+  font-size: 12px;
+  padding-bottom: 8px;
 }
 </style>
