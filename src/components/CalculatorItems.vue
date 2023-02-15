@@ -66,6 +66,7 @@ export default {
       if (!isNaN(element) || element === ".") {
         this.CalculatorResult += element + "";
       }
+
       if (element === "C") {
         this.CalculatorResult = "";
       }
@@ -79,11 +80,10 @@ export default {
         this.CalculatorResult = "";
       }
       if (element === "=") {
-        this.CalculatorResult = eval(
-          parseInt(this.previousValue) +
-            this.operator +
-            parseInt(this.CalculatorResult)
-        );
+        let previous = parseInt(this.previousValue);
+        let result = parseInt(this.CalculatorResult);
+        this.CalculatorResult = eval(previous + this.operator + result);
+        this.CalculatorResult = parseInt(this.CalculatorResult);
 
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
