@@ -11,6 +11,7 @@
     >
       <div class="calcname">NEOMORPH CALCULATOR</div>
       <div class="w-full m-1 p-3 text-right neoresult">
+        {{ Calculated }}
         {{ CalculatorResult || 0 }}
       </div>
 
@@ -36,6 +37,7 @@ export default {
   data: function () {
     return {
       CalculatorResult: "",
+      Calculated: "",
       CalculatorItems: [
         "C",
         "+",
@@ -58,7 +60,6 @@ export default {
         "+/-",
       ],
       operators: ["+", "-", "*", "/", "="],
-      sign: "",
       operator: undefined,
       previousValue: "",
     };
@@ -68,29 +69,27 @@ export default {
       if (!isNaN(element) || element === ".") {
         this.CalculatorResult += element + "";
       }
-
       if (element === "C") {
         this.CalculatorResult = "";
       }
       if (element === "%") {
         this.CalculatorResult = this.CalculatorResult / 100;
       }
+      if (element === "+/-") {
+        this.CalculatorResult = this.CalculatorResult + this.CalculatorResult;
+      }
 
       if (["/", "x", "*", "-", "+"].includes(element)) {
         this.operator = element;
         this.previousValue = this.CalculatorResult;
-
         this.CalculatorResult = "";
       }
       if (element === "=") {
-        let previous = parseInt(this.previousValue);
-        let result = parseInt(this.CalculatorResult);
-        this.CalculatorResult = eval(
-          Math.sign(previous) * previous +
-            this.operator +
-            Math.sign(result) * result
-        );
-        this.CalculatorResult = parseInt(this.CalculatorResult);
+        let previous = parseFloat(this.previousValue);
+        let result = parseFloat(this.CalculatorResult);
+
+        this.CalculatorResult = eval(previous + this.operator + result);
+        this.CalculatorResult = parseFloat(this.CalculatorResult);
 
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
