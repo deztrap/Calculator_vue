@@ -55,8 +55,10 @@ export default {
         "=",
         "0",
         ".",
+        "+/-",
       ],
       operators: ["+", "-", "*", "/", "="],
+      sign: "",
       operator: undefined,
       previousValue: "",
     };
@@ -73,6 +75,7 @@ export default {
       if (element === "%") {
         this.CalculatorResult = this.CalculatorResult / 100;
       }
+
       if (["/", "x", "*", "-", "+"].includes(element)) {
         this.operator = element;
         this.previousValue = this.CalculatorResult;
@@ -82,14 +85,17 @@ export default {
       if (element === "=") {
         let previous = parseInt(this.previousValue);
         let result = parseInt(this.CalculatorResult);
-        this.CalculatorResult = eval(previous + this.operator + result);
+        this.CalculatorResult = eval(
+          Math.sign(previous) * previous +
+            this.operator +
+            Math.sign(result) * result
+        );
         this.CalculatorResult = parseInt(this.CalculatorResult);
 
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
         }
-        this.previousValue = "";
-        this.operator = null;
+        this.CalculatorResult = this.previousValue;
       }
     },
   },
