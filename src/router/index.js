@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/calculator',
-    name: 'about',
+    name: 'calculator',
     component: () => import('../components/CalculatorItems.vue')
   }
 
