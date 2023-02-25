@@ -10,8 +10,12 @@
       "
     >
       <div class="calcname">NEOMORPH CALCULATOR</div>
+
       <div class="w-full m-1 p-3 text-right neoresult">
         {{ CalculatorResult || 0 }}
+        <p class="history" v-for="result in history" :key="result">
+          {{ result }}
+        </p>
       </div>
 
       <div class="row no-gutters" style="padding-top: 40px">
@@ -62,6 +66,7 @@ export default {
       operator: undefined,
       previousValue: "",
       calculatedValue: "",
+      history: [],
     };
   },
   methods: {
@@ -85,10 +90,12 @@ export default {
           this.previousValue + this.operator + this.CalculatorResult
         );
         this.CalculatorResult = parseFloat(this.CalculatorResult);
+        this.history.push(this.CalculatorResult);
 
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
         }
+
         //  this.CalculatorResult = this.previousValue;
       }
     },
@@ -147,5 +154,9 @@ export default {
   color: #535659;
   font-size: 12px;
   padding-bottom: 8px;
+}
+.history {
+  color: white;
+  font-size: 12px;
 }
 </style>
