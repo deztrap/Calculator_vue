@@ -11,7 +11,6 @@
     >
       <div class="calcname">NEOMORPH CALCULATOR</div>
       <div class="w-full m-1 p-3 text-right neoresult">
-        {{ Calculated }}
         {{ CalculatorResult || 0 }}
       </div>
 
@@ -37,7 +36,6 @@ export default {
   data: function () {
     return {
       CalculatorResult: "",
-      Calculated: "",
       CalculatorItems: [
         "C",
         "+",
@@ -57,7 +55,6 @@ export default {
         "=",
         "0",
         ".",
-        "+/-",
       ],
       operators: ["+", "-", "*", "/", "="],
       operator: undefined,
@@ -74,9 +71,6 @@ export default {
       }
       if (element === "%") {
         this.CalculatorResult = this.CalculatorResult / 100;
-      }
-      if (element === "+/-") {
-        this.CalculatorResult = this.CalculatorResult + this.CalculatorResult;
       }
 
       if (["/", "x", "*", "-", "+"].includes(element)) {
