@@ -3,7 +3,8 @@
     <nav class="dark-bgn">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
-      <router-link to="/calculator">Calculator</router-link>
+      <router-link to="/calculator">Calculator</router-link> |
+      <router-link to="/calculatoragain">Calculator2</router-link>
     </nav>
     <router-view />
   </div>

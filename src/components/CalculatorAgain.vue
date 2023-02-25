@@ -32,7 +32,7 @@
 </template>
 <script>
 export default {
-  name: "CalculatorItem",
+  name: "CalculatorAgain",
   data: function () {
     return {
       CalculatorResult: "",
@@ -55,16 +55,19 @@ export default {
         "=",
         "0",
         ".",
+        "sin",
+        "cos",
       ],
       operators: ["+", "-", "*", "/", "="],
       operator: undefined,
       previousValue: "",
+      calculatedValue: "",
     };
   },
   methods: {
     calculate(element) {
-      if (!isNaN(element) || element === ".") {
-        this.CalculatorResult += element + "";
+      if (!isNaN(element) || element === "." || element === "-") {
+        this.CalculatorResult += element;
       }
       if (element === "C") {
         this.CalculatorResult = "";
@@ -72,23 +75,21 @@ export default {
       if (element === "%") {
         this.CalculatorResult = this.CalculatorResult / 100;
       }
-
-      if (["/", "x", "*", "-", "+"].includes(element)) {
+      if (["/", "x", "*", "+"].includes(element)) {
         this.operator = element;
         this.previousValue = this.CalculatorResult;
         this.CalculatorResult = "";
       }
       if (element === "=") {
-        let previous = parseInt(this.previousValue);
-        let result = parseInt(this.CalculatorResult);
-
-        this.CalculatorResult = eval(previous + this.operator + result);
+        this.CalculatorResult = eval(
+          this.previousValue + this.operator + this.CalculatorResult
+        );
         this.CalculatorResult = parseFloat(this.CalculatorResult);
 
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
         }
-        this.CalculatorResult = this.previousValue;
+        //  this.CalculatorResult = this.previousValue;
       }
     },
   },
