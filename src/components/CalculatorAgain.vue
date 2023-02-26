@@ -101,7 +101,7 @@ export default {
       }
     },
     mounted() {
-    this.history = localStorage.getItem("my_history") || [];
+    this.history = JSON.parse(localStorage.getItem("my_history")) || [];
   },
   },
 };
