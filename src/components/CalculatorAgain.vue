@@ -91,6 +91,7 @@ export default {
         );
         this.CalculatorResult = parseFloat(this.CalculatorResult);
         this.history.push(this.CalculatorResult);
+        localStorage.setItem("my_history", JSON.stringify(this.history));
 
         if (this.CalculatorResult === Infinity) {
           this.CalculatorResult = "Really? dbz";
@@ -99,6 +100,9 @@ export default {
         //  this.CalculatorResult = this.previousValue;
       }
     },
+    mounted() {
+    this.history = localStorage.getItem("my_history") || [];
+  },
   },
 };
 </script>
